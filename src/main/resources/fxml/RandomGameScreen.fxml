@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import custom.NumberTextField?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RandomGameController">
+   <children>
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#backButton" text="back" />
+      <NumberTextField  fx:id="numberOne" layoutX="115.0" layoutY="125.0" prefHeight="25.0" prefWidth="30.0" />
+      <NumberTextField fx:id="numberTwo" layoutX="115.0" layoutY="150.0" prefHeight="25.0" prefWidth="30.0" />
+      <NumberTextField fx:id="numberThree" layoutX="115.0" layoutY="175.0" prefHeight="25.0" prefWidth="30.0" />
+      <NumberTextField fx:id="numberFour" layoutX="115.0" layoutY="200.0" prefHeight="25.0" prefWidth="30.0" />
+      <NumberTextField fx:id="numberFive" layoutX="115.0" layoutY="225.0" prefHeight="25.0" prefWidth="30.0" />
+      <NumberTextField fx:id="numberSix" layoutX="115.0" layoutY="250.0" prefHeight="25.0" prefWidth="30.0" />
+      <Label layoutX="98.0" layoutY="129.0" text="1" />
+      <Label layoutX="98.0" layoutY="154.0" text="2" />
+      <Label layoutX="98.0" layoutY="179.0" text="3" />
+      <Label layoutX="98.0" layoutY="204.0" text="4" />
+      <Label layoutX="98.0" layoutY="229.0" text="5" />
+      <Label layoutX="98.0" layoutY="254.0" text="6" />
+      <Button layoutX="195.0" layoutY="125.0" mnemonicParsing="false" onAction="#playRandom" prefHeight="151.0" prefWidth="72.0" rotate="-5.7" text="Losowanie" />
+      <Label layoutX="354.0" layoutY="129.0" text="twoje liczby" />
+      <Label layoutX="354.0" layoutY="213.0" text="wylosowane liczby" />
+      <Label fx:id="playerNumberOne" layoutX="354.0" layoutY="163.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="playerNumberTwo" layoutX="385.0" layoutY="163.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="playerNumberThree" layoutX="416.0" layoutY="163.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="playerNumberFour" layoutX="354.0" layoutY="188.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="playerNumberFive" layoutX="385.0" layoutY="188.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="playerNumberSix" layoutX="416.0" layoutY="188.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberSix" layoutX="416.0" layoutY="267.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberFive" layoutX="385.0" layoutY="267.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberFour" layoutX="354.0" layoutY="267.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberThree" layoutX="416.0" layoutY="242.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberTwo" layoutX="385.0" layoutY="242.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="drawNumberOne" layoutX="354.0" layoutY="242.0" prefHeight="17.0" prefWidth="15.0" text="X" />
+      <Label fx:id="result" layoutX="188.0" layoutY="314.0">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
