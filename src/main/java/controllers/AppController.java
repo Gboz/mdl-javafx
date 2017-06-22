@@ -24,7 +24,7 @@ public class AppController {
 
 	private int pom1, pom2, pom3;
 	private int hh1, hh2, mm1, mm2;
-	private int dn = 0, dnPom = 0;
+	private int dn = 0, mn = 0;
 
 	public void compute() {
 
@@ -44,10 +44,10 @@ public class AppController {
 		mm1 = Integer.valueOf(input3.getText());
 		mm2 = Integer.valueOf(input4.getText());
 
-		// mamy petle dni w miesi¹cu
+		// mamy petle dni w miesiï¿½cu
 		System.out.println("### BEGIN ###");
 		for (int i = 1; i <= 30; i++) {
-			// sprawdzamy czy dzieñ miesiêca spe³nia warunek
+			// sprawdzamy czy dzieï¿½ miesiï¿½ca speï¿½nia warunek
 			if (i >= pom1 && i <= pom2) {
 				System.out.println("<" + i + ">");
 				System.out.println("POM1: " + pom1);
@@ -61,7 +61,14 @@ public class AppController {
 				for (int j = 1; j <= 24; j++) {
 					// liczymy czas od 8 do 16
 					if (i == pom1 && (j >= hh1 && j < 16)) {
-						dnPom++;
+						dn++;
+						if (j == hh1) {
+							for (int x = 1; x <= 60 ; x++) {
+								if (x > mm1) {
+									mn++;
+								}
+							}
+						}
 					}
 					
 					if (i > pom1 && i < pom2 &&(j >= 8 && j < 16)) {
@@ -69,27 +76,35 @@ public class AppController {
 					}
 					
 					if (i == pom2 && (j >= 8 && j < hh2)) {
-						dnPom++;
+						dn++;
+
+						if (j == hh2 -1) {
+							for (int x = 1; x <= 60 ; x++) {
+								if (x <= mm2) {
+									mn++;
+								}
+							}
+						}
 					}
 					
 					System.out.println(j + " | " + dn);
-					System.out.println(j + " || " + dnPom);
+					System.out.println(j + " || " + mn);
 				}
 			}
 
 		}
 		System.out.println("<<< " + dn + " >>>");
-		System.out.println("<<< " + dnPom + " >>>");
+		System.out.println("<<< " + mn + " >>>");
 		System.out.println("### END ###");
 
-		result.setText("dni: " + period.getDays() + "\nmiesi¹ce: " + period.getMonths() + "\nlata" + period.getYears()
-				+ "\ndni 1: " + pom1 + "\ndni2 2: " + pom2 + "\nró¿nica 3: " + pom3 + "\ngodziny czasu 1" + hh1
+		result.setText("dni: " + period.getDays() + "\nmiesiï¿½ce: " + period.getMonths() + "\nlata" + period.getYears()
+				+ "\ndni 1: " + pom1 + "\ndni2 2: " + pom2 + "\nrï¿½nica 3: " + pom3 + "\ngodziny czasu 1" + hh1
 				+ "\ngodziny czasu 2" + hh2 + "\nminuty czasu 1" + mm1 + "\nminuty czasu 2" + mm2
-				+ "\ngodziny spêdzone nad zadaniem: " + dn
+				+ "\ngodziny spï¿½dzone nad zadaniem: " + dn
 		);
 
 		dn = 0;
-		dnPom = 0;
+		mn = 0;
 	}
 
 	@FXML
