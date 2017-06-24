@@ -1,9 +1,7 @@
 package controllers;
 
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -11,113 +9,97 @@ import javafx.scene.control.TextField;
 
 public class AppController {
 
-	private MainController mainController;
+    private MainController mainController;
 
-	@FXML
-	private TextField input1, input2, input3, input4;
+    @FXML
+    private TextField input1, input2, input3, input4;
 
-	@FXML
-	private DatePicker beginDate, endDate;
+    @FXML
+    private DatePicker beginDate, endDate;
 
-	@FXML
-	private Label result;
+    @FXML
+    private Label result;
 
-	private int pom1, pom2, pom3;
-	private int hh1, hh2, mm1, mm2;
-	private int dn = 0, mn = 0;
+    private int pom1, pom2;
+    private int hh1, hh2, mm1, mm2;
+    private int dn = 0, mn = 0;
 
-	public void compute() {
+    public void compute() {
+        try {
+            initVars();
+            // mamy petle dni w miesi�cu
+            System.out.println("### BEGIN ###");
+            for (int i = 1; i <= 30; i++) {
+                // sprawdzamy czy dzie� miesi�ca spe�nia warunek
+                if (i >= pom1 && i <= pom2) {
+                    // petla godzin w dniu
+                    for (int j = 1; j <= 24; j++) {
+                        // liczymy czas od 8 do 16
+                        if (i == pom1 && (j >= hh1 && j < 16)) {
+                            dn++;
+                            if (j == hh1) {
+                                for (int x = 1; x <= 60; x++) {
+                                    if (x > mm1) {
+                                        mn++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i > pom1 && i < pom2 && (j >= 8 && j < 16)) {
+                            dn++;
+                        }
+                        if (i == pom2 && (j >= 8 && j < hh2)) {
+                            dn++;
 
-		LocalDate localDate = beginDate.getValue();
-		LocalDate localDate2 = endDate.getValue();
+                            if (j == hh2 - 1) {
+                                for (int x = 1; x <= 60; x++) {
+                                    if (x <= mm2) {
+                                        mn++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
 
-		// 19/Jun/17 9:01 AM
-		// 25/Jun/17 11:10 PM
+            }
+            result.setText(dn + "h " + mn + "min");
 
-		Period period = Period.between(localDate, localDate2);
+            dn = 0;
+            mn = 0;
+        } catch (Exception e) {
+            result.setText("enter valid date!");
+            System.out.println("### ERROR ###");
+        }
+        System.out.println("### END ###");
+    }
 
-		pom1 = localDate.getDayOfMonth();
-		pom2 = localDate2.getDayOfMonth();
-		pom3 = pom2 - pom1;
-		hh1 = Integer.valueOf(input1.getText());
-		hh2 = Integer.valueOf(input2.getText());
-		mm1 = Integer.valueOf(input3.getText());
-		mm2 = Integer.valueOf(input4.getText());
+    @FXML
+    public void backButton() {
+        mainController.loadMenuScreen();
+    }
 
-		// mamy petle dni w miesi�cu
-		System.out.println("### BEGIN ###");
-		for (int i = 1; i <= 30; i++) {
-			// sprawdzamy czy dzie� miesi�ca spe�nia warunek
-			if (i >= pom1 && i <= pom2) {
-				System.out.println("<" + i + ">");
-				System.out.println("POM1: " + pom1);
-				System.out.println("POM2: " + pom2);
-				System.out.println("POM3: " + pom3);
-				System.out.println("HH1: " + hh1);
-				System.out.println("HH2: " + hh2);
-				System.out.println("MM1: " + mm1);
-				System.out.println("MM2: " + mm2);
-				// petla godzin w dniu
-				for (int j = 1; j <= 24; j++) {
-					// liczymy czas od 8 do 16
-					if (i == pom1 && (j >= hh1 && j < 16)) {
-						dn++;
-						if (j == hh1) {
-							for (int x = 1; x <= 60 ; x++) {
-								if (x > mm1) {
-									mn++;
-								}
-							}
-						}
-					}
-					
-					if (i > pom1 && i < pom2 &&(j >= 8 && j < 16)) {
-						dn++;
-					}
-					
-					if (i == pom2 && (j >= 8 && j < hh2)) {
-						dn++;
+    public MainController getMainController() {
+        return mainController;
+    }
 
-						if (j == hh2 -1) {
-							for (int x = 1; x <= 60 ; x++) {
-								if (x <= mm2) {
-									mn++;
-								}
-							}
-						}
-					}
-					
-					System.out.println(j + " | " + dn);
-					System.out.println(j + " || " + mn);
-				}
-			}
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
-		}
-		System.out.println("<<< " + dn + " >>>");
-		System.out.println("<<< " + mn + " >>>");
-		System.out.println("### END ###");
+    public void initVars() {
+        LocalDate localDate = beginDate.getValue();
+        LocalDate localDate2 = endDate.getValue();
 
-		result.setText("dni: " + period.getDays() + "\nmiesi�ce: " + period.getMonths() + "\nlata" + period.getYears()
-				+ "\ndni 1: " + pom1 + "\ndni2 2: " + pom2 + "\nr�nica 3: " + pom3 + "\ngodziny czasu 1" + hh1
-				+ "\ngodziny czasu 2" + hh2 + "\nminuty czasu 1" + mm1 + "\nminuty czasu 2" + mm2
-				+ "\ngodziny sp�dzone nad zadaniem: " + dn
-		);
+        // 19/Jun/17 9:01 AM
+        // 25/Jun/17 11:10 PM
 
-		dn = 0;
-		mn = 0;
-	}
-
-	@FXML
-	public void backButton() {
-		mainController.loadMenuScreen();
-	}
-
-	public MainController getMainController() {
-		return mainController;
-	}
-
-	public void setMainController(MainController mainController) {
-		this.mainController = mainController;
-	}
+        pom1 = localDate.getDayOfMonth();
+        pom2 = localDate2.getDayOfMonth();
+        hh1 = Integer.valueOf(input1.getText());
+        hh2 = Integer.valueOf(input2.getText());
+        mm1 = Integer.valueOf(input3.getText());
+        mm2 = Integer.valueOf(input4.getText());
+    }
 
 }

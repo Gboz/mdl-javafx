@@ -1,0 +1,9 @@
+.button {
+    -fx-background-color: dodgerblue;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-background-color: crimson;
+    -fx-text-fill: aliceblue;
+}

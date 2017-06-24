@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuController">
    <children>
-      <Button layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#openApp" text="Kalkulator SLA">
+      <Button layoutX="346.0" layoutY="14.0" mnemonicParsing="false" onAction="#openApp" prefHeight="53.0" prefWidth="240.0" text="Kalkulator SLA">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
          <font>
             <Font name="Arial Black" size="15.0" />
          </font></Button>
-      <Button layoutX="15.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitApp" text="Exit" />
-      <Button layoutX="365.0" layoutY="14.0" mnemonicParsing="false" onAction="#openRPGModule" text="Moduł RPG">
+      <Button layoutX="14.0" layoutY="346.0" mnemonicParsing="false" onAction="#exitApp" prefHeight="40.0" prefWidth="64.0" text="Exit" />
+      <Button layoutX="346.0" layoutY="120.0" mnemonicParsing="false" onAction="#openRPGModule" prefHeight="53.0" prefWidth="240.0" text="Moduł RPG">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>
          <font>
             <Font name="Arial Black" size="15.0" />
          </font></Button>
-      <Button layoutX="168.0" layoutY="14.0" mnemonicParsing="false" onAction="#openRandomGameModule" text="Symulator Totolotka">
+      <Button layoutX="346.0" layoutY="67.0" mnemonicParsing="false" onAction="#openRandomGameModule" prefHeight="53.0" prefWidth="240.0" text="Symulator Totolotka">
          <padding>
             <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
          </padding>

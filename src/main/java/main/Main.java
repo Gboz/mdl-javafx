@@ -17,6 +17,7 @@ public class Main extends Application {
 		FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainScreen.fxml"));
 		StackPane stackPane = loader.load();
 		Scene scene = new Scene(stackPane, 900, 900);
+		scene.getStylesheets().add("/styles/style.css");
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Flow Example");
 		primaryStage.show();
