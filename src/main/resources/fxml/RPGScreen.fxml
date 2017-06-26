@@ -8,12 +8,12 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.RPGController">
    <children>
       <Button layoutX="14.0" layoutY="346.0" mnemonicParsing="false" onAction="#backButton" prefHeight="40.0" prefWidth="64.0" text="back" />
-      <Button layoutX="184.0" layoutY="231.0" mnemonicParsing="false" onAction="#hitFirstPL" rotate="-40.9" text="hit">
+      <Button layoutX="90.0" layoutY="257.0" mnemonicParsing="false" onAction="#hitFirstPL" prefHeight="60.0" prefWidth="72.0" text="hit">
          <font>
             <Font size="29.0" />
          </font></Button>
       <Button layoutX="440.0" layoutY="285.0" mnemonicParsing="false" onAction="#hitSecondPL" text="hit" />
-      <Label fx:id="hpFirstPL" layoutX="52.0" layoutY="268.0" text="HP">
+      <Label fx:id="hpFirstPL" layoutX="46.0" layoutY="249.0" prefHeight="25.0" prefWidth="38.0" text="HP">
          <font>
             <Font size="27.0" />
          </font></Label>

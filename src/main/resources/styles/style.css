@@ -1,9 +1,11 @@
 .button {
     -fx-background-color: dodgerblue;
     -fx-text-fill: white;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 5;
 }
 
 .text-field {
-    -fx-background-color: crimson;
+    -fx-background-color: slategrey;
     -fx-text-fill: aliceblue;
 }

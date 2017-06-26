@@ -20,41 +20,49 @@ public class AppController {
     @FXML
     private Label result;
 
-    private int pom1, pom2;
-    private int hh1, hh2, mm1, mm2;
-    private int dn = 0, mn = 0;
+    private int beginDay, endDay;
+    private int beginHour, endHour, beginMinute, endMinute;
+    private int resultHours = 0, resultMinutes = 0;
 
     public void compute() {
         try {
             initVars();
-            // mamy petle dni w miesi�cu
             System.out.println("### BEGIN ###");
+            // mamy petle dni w miesiącu
             for (int i = 1; i <= 30; i++) {
-                // sprawdzamy czy dzie� miesi�ca spe�nia warunek
-                if (i >= pom1 && i <= pom2) {
+                // sprawdzamy czy dzień miesiąca spełnia warunek
+                // true, gdy natrafimy na wybrany okres czasu
+                if (i >= beginDay && i <= endDay) {
                     // petla godzin w dniu
                     for (int j = 1; j <= 24; j++) {
-                        // liczymy czas od 8 do 16
-                        if (i == pom1 && (j >= hh1 && j < 16)) {
-                            dn++;
-                            if (j == hh1) {
+                        // liczymy czas od 8 do 16 dla pierwszego dnia zakresu
+                        if (i == beginDay && (j >= 8 && j < 16)) {
+                            // jeżeli nie trafimy na godzinę rozpoczęcia zakresu spełniamy warunek
+                            if (j != beginHour && j >= beginHour) {
+                                resultHours++;
+                            } else {
+                                // else gdy mamy do czynienia z godziną rozpoczęcia zakresu korzystamy z pętli minut
                                 for (int x = 1; x <= 60; x++) {
-                                    if (x > mm1) {
-                                        mn++;
+                                    // jeżeli
+                                    if (x > beginMinute) {
+                                        resultMinutes++;
                                     }
                                 }
                             }
                         }
-                        if (i > pom1 && i < pom2 && (j >= 8 && j < 16)) {
-                            dn++;
+                        // liczymy godziny pomiędzy pierwszym a ostatnim dniem zakresu
+                        if (i > beginDay && i < endDay && (j >= 8 && j < 16)) {
+                            resultHours++;
                         }
-                        if (i == pom2 && (j >= 8 && j < hh2)) {
-                            dn++;
+                        // liczymy czas od 8 do 16 dla drugiego dnia zakresu
+                        if (i == endDay && (j >= 8 && j <= endHour && j < 16)) {
 
-                            if (j == hh2 - 1) {
+                            if (j != endHour) {
+                                resultHours++;
+                            } else {
                                 for (int x = 1; x <= 60; x++) {
-                                    if (x <= mm2) {
-                                        mn++;
+                                    if (x <= endMinute) {
+                                        resultMinutes++;
                                     }
                                 }
                             }
@@ -63,10 +71,10 @@ public class AppController {
                 }
 
             }
-            result.setText(dn + "h " + mn + "min");
+            result.setText(resultHours + "h " + resultMinutes + "min");
 
-            dn = 0;
-            mn = 0;
+            resultHours = 0;
+            resultMinutes = 0;
         } catch (Exception e) {
             result.setText("enter valid date!");
             System.out.println("### ERROR ###");
@@ -94,12 +102,12 @@ public class AppController {
         // 19/Jun/17 9:01 AM
         // 25/Jun/17 11:10 PM
 
-        pom1 = localDate.getDayOfMonth();
-        pom2 = localDate2.getDayOfMonth();
-        hh1 = Integer.valueOf(input1.getText());
-        hh2 = Integer.valueOf(input2.getText());
-        mm1 = Integer.valueOf(input3.getText());
-        mm2 = Integer.valueOf(input4.getText());
+        beginDay = localDate.getDayOfMonth();
+        endDay = localDate2.getDayOfMonth();
+        beginHour = Integer.valueOf(input1.getText());
+        endHour = Integer.valueOf(input2.getText());
+        beginMinute = Integer.valueOf(input3.getText());
+        endMinute = Integer.valueOf(input4.getText());
     }
 
 }
