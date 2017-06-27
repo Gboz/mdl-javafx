@@ -36,9 +36,9 @@ public class AppController {
                     // petla godzin w dniu
                     for (int j = 1; j <= 24; j++) {
                         // liczymy czas od 8 do 16 dla pierwszego dnia zakresu
-                        if (i == beginDay && (j >= 8 && j < 16)) {
+                        if (i == beginDay && (j >= 8 && j < 16 && j >= beginHour)) {
                             // jeżeli nie trafimy na godzinę rozpoczęcia zakresu spełniamy warunek
-                            if (j != beginHour && j >= beginHour) {
+                            if (j != beginHour && j > beginHour) {
                                 resultHours++;
                             } else {
                                 // else gdy mamy do czynienia z godziną rozpoczęcia zakresu korzystamy z pętli minut
@@ -71,6 +71,10 @@ public class AppController {
                 }
 
             }
+
+            resultHours = resultHours + (resultMinutes / 60);
+            resultMinutes = resultMinutes % 60;
+
             result.setText(resultHours + "h " + resultMinutes + "min");
 
             resultHours = 0;
