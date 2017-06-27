@@ -15,7 +15,7 @@ public class AppController {
     private TextField input1, input2, input3, input4;
 
     @FXML
-    private DatePicker beginDate, endDate;
+    private DatePicker beginDate, endDate, parPicker;
 
     @FXML
     private Label result;
@@ -25,6 +25,7 @@ public class AppController {
     private int resultHours = 0, resultMinutes = 0;
 
     public void compute() {
+
         try {
             initVars();
             System.out.println("### BEGIN ###");
