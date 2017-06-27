@@ -12,17 +12,27 @@ public class AppController {
     private MainController mainController;
 
     @FXML
-    private TextField input1, input2, input3, input4;
+    private TextField input1, input2, input3, input4, parserPicker1, parserPicker2;
 
     @FXML
-    private DatePicker beginDate, endDate, parPicker;
+    private DatePicker beginDate, endDate;
 
     @FXML
-    private Label result;
+    private Label result, resultFromParser;
 
     private int beginDay, endDay;
     private int beginHour, endHour, beginMinute, endMinute;
     private int resultHours = 0, resultMinutes = 0;
+
+
+    public void parse() {
+        try {
+            // TODO
+            resultFromParser.setText(parserPicker1.getText() + "\n" + parserPicker2.getText());
+        } catch (Exception e) {
+            resultFromParser.setText("enter valid data");
+        }
+    }
 
     public void compute() {
 
@@ -87,19 +97,6 @@ public class AppController {
         System.out.println("### END ###");
     }
 
-    @FXML
-    public void backButton() {
-        mainController.loadMenuScreen();
-    }
-
-    public MainController getMainController() {
-        return mainController;
-    }
-
-    public void setMainController(MainController mainController) {
-        this.mainController = mainController;
-    }
-
     public void initVars() {
         LocalDate localDate = beginDate.getValue();
         LocalDate localDate2 = endDate.getValue();
@@ -113,6 +110,19 @@ public class AppController {
         endHour = Integer.valueOf(input2.getText());
         beginMinute = Integer.valueOf(input3.getText());
         endMinute = Integer.valueOf(input4.getText());
+    }
+
+    @FXML
+    public void backButton() {
+        mainController.loadMenuScreen();
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
     }
 
 }
