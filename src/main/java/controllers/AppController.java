@@ -32,7 +32,7 @@ public class AppController {
             for (int i = 1; i <= 30; i++) {
                 // sprawdzamy czy dzień miesiąca spełnia warunek
                 // true, gdy natrafimy na wybrany okres czasu
-                if (i >= beginDay && i <= endDay) {
+                if (i >= beginDay && i <= endDay && (i != 3 && i != 4 && i != 10 && i != 11 && i != 17 && i != 18 && i != 24 && i != 25)) {
                     // petla godzin w dniu
                     for (int j = 1; j <= 24; j++) {
                         // liczymy czas od 8 do 16 dla pierwszego dnia zakresu
