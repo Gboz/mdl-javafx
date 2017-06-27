@@ -24,14 +24,22 @@ public class AppController {
     private int beginHour, endHour, beginMinute, endMinute;
     private int resultHours = 0, resultMinutes = 0;
 
+    private int pBeginDay, pEndDay;
+    private int pBeginHour, pEndHour, pBeginMinute, pEndMinute;
+    private int pResultHours = 0, pResultMinutes = 0;
+
 
     public void parse() {
         try {
-            // TODO
+            initVarsToParse();
             resultFromParser.setText(parserPicker1.getText() + "\n" + parserPicker2.getText());
         } catch (Exception e) {
             resultFromParser.setText("enter valid data");
         }
+    }
+
+    public void initVarsToParse() {
+
     }
 
     public void compute() {
