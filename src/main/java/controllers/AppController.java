@@ -3,8 +3,6 @@ package controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.StringTokenizer;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -35,32 +33,70 @@ public class AppController {
 
     public void parse() {
         try {
+            System.out.println("### BEGIN ###");
             initVarsToParse();
+            for (int i = 1; i <= 30; i++) {
+                if (i >= pBeginDay && i <= pEndDay && (i != 3 && i != 4 && i != 10 && i != 11 && i != 17 && i != 18 && i != 24 && i != 25)) {
+                    for (int j = 1; j <= 24; j++) {
+                        if (i == pBeginDay && (j >= 8 && j < 16 && j >= pBeginHour)) {
+                            if (j != pBeginHour && j > pBeginHour) {
+                                pResultHours++;
+                            } else {
+                                for (int x = 1; x <= 60; x++) {
+                                    if (x > pBeginMinute) {
+                                        pResultMinutes++;
+                                    }
+                                }
+                            }
+                        }
+                        if (i > pBeginDay && i < pEndDay && (j >= 8 && j < 16)) {
+                            pResultHours++;
+                        }
+                        if (i == pEndDay && (j >= 8 && j <= pEndHour && j < 16)) {
+                            if (j != pEndHour) {
+                                pResultHours++;
+                            } else {
+                                for (int x = 1; x <= 60; x++) {
+                                    if (x <= pEndMinute) {
+                                        pResultMinutes++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            pResultHours = pResultHours + (pResultMinutes / 60);
+            pResultMinutes = pResultMinutes % 60;
 
+            resultFromParser.setText(pResultHours + "h " + pResultMinutes + "min");
 
-            resultFromParser.setText(parserPicker1.getText() + "\n" + parserPicker2.getText());
+            pResultHours = 0;
+            pResultMinutes = 0;
         } catch (Exception e) {
-            resultFromParser.setText("enter valid data");
+            resultFromParser.setText("enter valid date!");
+            System.out.println("### ERROR ###");
         }
+        System.out.println("### END ###");
     }
 
     public void initVarsToParse() {
         String pattern1 = parserPicker1.getText();
         String[] parts = pattern1.split(" ");
         List<String> list = new ArrayList<String>();
+        System.out.println("DEBUG " + list);
         for (String var : parts) {
-//            System.out.println(var);
             list.add(var);
         }
-        System.out.println(list);
         String[] parts2 = list.get(0).split("/");
+        System.out.println("DEBUG " + list);
         list.remove(0);
+        System.out.println("DEBUG " + list);
         for (int i = 0; i < parts2.length; i++) {
             list.add(parts2[i]);
         }
-        System.out.println(list);
-
         String[] parts3 = list.get(0).split(":");
+        System.out.println("DEBUG " + list);
         list.remove(0);
         for (int i = 0; i < parts3.length; i++) {
             list.add(parts3[i]);
@@ -69,16 +105,37 @@ public class AppController {
         pBeginDay = Integer.valueOf(list.get(0));
         pBeginHour = Integer.valueOf(list.get(3));
         pBeginMinute = Integer.valueOf(list.get(4));
-        System.out.println(pBeginDay);
-        System.out.println(pBeginHour);
-        System.out.println(pBeginMinute);
+        System.out.println(pBeginDay + " " + pBeginHour + " " + pBeginMinute);
 
+        //second
+        String pattern2 = parserPicker2.getText();
+        String[] parts4 = pattern2.split(" ");
+        List<String> list2 = new ArrayList<String>();
+        System.out.println("DEBUG " + list2);
+        for (String var : parts4) {
+            list2.add(var);
+        }
+        System.out.println("DEBUG " + list2);
+        String[] parts5 = list2.get(0).split("/");
+        list2.remove(0);
+        System.out.println("DEBUG " + list2);
+        for (int i = 0; i < parts5.length; i++) {
+            list2.add(parts5[i]);
+        }
+        System.out.println("DEBUG " + list2);
+        String[] parts6 = list2.get(0).split(":");
+        list2.remove(0);
+        for (int i = 0; i < parts6.length; i++) {
+            list2.add(parts6[i]);
+        }
+        System.out.println(list2);
+        pEndDay = Integer.valueOf(list2.get(0));
+        pEndHour = Integer.valueOf(list2.get(3));
+        pEndMinute = Integer.valueOf(list2.get(4));
+        System.out.println(pEndDay + " " + pEndHour + " " + pEndMinute);
 
-//
-//        StringTokenizer stringTokenizer = new StringTokenizer(pattern1, "/");
-//        System.out.println(stringTokenizer.nextToken());
-//        System.out.println(stringTokenizer.nextToken());
-//        System.out.println(stringTokenizer.nextToken());
+        list.removeAll(list);
+        list2.removeAll(list2);
     }
 
     public void compute() {
