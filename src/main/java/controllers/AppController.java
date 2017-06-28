@@ -1,6 +1,10 @@
 package controllers;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -32,6 +36,8 @@ public class AppController {
     public void parse() {
         try {
             initVarsToParse();
+
+
             resultFromParser.setText(parserPicker1.getText() + "\n" + parserPicker2.getText());
         } catch (Exception e) {
             resultFromParser.setText("enter valid data");
@@ -39,7 +45,40 @@ public class AppController {
     }
 
     public void initVarsToParse() {
+        String pattern1 = parserPicker1.getText();
+        String[] parts = pattern1.split(" ");
+        List<String> list = new ArrayList<String>();
+        for (String var : parts) {
+//            System.out.println(var);
+            list.add(var);
+        }
+        System.out.println(list);
+        String[] parts2 = list.get(0).split("/");
+        list.remove(0);
+        for (int i = 0; i < parts2.length; i++) {
+            list.add(parts2[i]);
+        }
+        System.out.println(list);
 
+        String[] parts3 = list.get(0).split(":");
+        list.remove(0);
+        for (int i = 0; i < parts3.length; i++) {
+            list.add(parts3[i]);
+        }
+        System.out.println(list);
+        pBeginDay = Integer.valueOf(list.get(0));
+        pBeginHour = Integer.valueOf(list.get(3));
+        pBeginMinute = Integer.valueOf(list.get(4));
+        System.out.println(pBeginDay);
+        System.out.println(pBeginHour);
+        System.out.println(pBeginMinute);
+
+
+//
+//        StringTokenizer stringTokenizer = new StringTokenizer(pattern1, "/");
+//        System.out.println(stringTokenizer.nextToken());
+//        System.out.println(stringTokenizer.nextToken());
+//        System.out.println(stringTokenizer.nextToken());
     }
 
     public void compute() {
@@ -88,7 +127,6 @@ public class AppController {
                         }
                     }
                 }
-
             }
 
             resultHours = resultHours + (resultMinutes / 60);
